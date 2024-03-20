@@ -81,6 +81,11 @@ class Post(MyBaseModel):
                                    null=False,
                                    verbose_name="Description",
                                    )
+    author = models.ForeignKey(User,
+                               related_name='phone_book_rows',
+                               on_delete=models.PROTECT,
+                               verbose_name="Author",
+                               )
 
     class Meta:
         verbose_name = "Post"
@@ -88,3 +93,17 @@ class Post(MyBaseModel):
 
     def __str__(self):
         return f'{self.title}({self.category.title})'
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post,
+        related_name="comments",
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=255)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.post.title, self.name)

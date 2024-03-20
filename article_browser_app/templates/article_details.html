@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+
+
+{% block content %}
+
+	<h1>{{ post.title }}</h1>
+    <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
+    <br/>
+	<small>By:
+		{{ post.author.first_name }}
+		{{ post.author.last_name }} -
+		{{ post.created_date }}
+
+		{% if user.is_authenticated %}
+			{% if user.id == post.author.id %}
+				- <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+
+				<a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+			{% endif %}
+		{% endif %}
+	</small><br/>
+	<hr>
+	{{ post.description|safe }}
+
+	<hr>
+
+
+<br/>
+<br/>
+
+
+<h1>Comments...</h1>
+<br/>
+{% if not post.comments.all %}
+	No Comments Yet...<a href="{% url 'add_comment' post.pk %}">Add One</a>
+{% else %}
+
+<a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+<br/><br/>
+
+	{% for comment in post.comments.all %}
+		<strong>
+			{{ comment.name }} -
+			{{ comment.date_added }}
+		</strong>
+		<br/>
+		{{ comment.body }}
+		<br/><br/>
+
+
+	{% endfor %}
+		<a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+{% endif %}
+<br/>
+
+
+
+<br/><br/>
+{% endblock %}
