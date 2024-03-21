@@ -3,8 +3,18 @@
 {% block content %}
 
 
+
 {% if user.is_authenticated %}
     <h1>Posts</h1>
+    <style>
+        h1 {
+          text-align: Left;
+        }
+
+        h2 {
+          text-align: Left;
+        }
+    </style>
 
     <ul>
     {% for post in object_list %}
@@ -27,6 +37,20 @@
     {% endfor %}
     </ul>
 {% else %}
+    <style>
+        h1 {
+          text-align: center;
+        }
+
+        h2 {
+          text-align: center;
+        }
+    </style>
+    <h1>Welcome To Article Browser Website</h1>
+    <br/>
+    <h2>Please Login OR Register To Enjoy</h2>
+
+
 
 {% endif %}
 

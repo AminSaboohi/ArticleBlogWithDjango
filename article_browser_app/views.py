@@ -13,12 +13,6 @@ class HomeView(ListView):
     template_name = 'blog_home.html'
     ordering = ['id']
 
-    def get_context_data(self, *args, **kwargs):
-        cat_menu = Category.objects.all()
-        context = super(HomeView, self).get_context_data(*args, **kwargs)
-        context["cat_menu"] = cat_menu
-        return context
-
 
 def logout_user(request):
     logout(request)
@@ -76,7 +70,7 @@ class AddCommentView(CreateView):
 class AddCategoryView(CreateView):
     model = Category
     template_name = 'add_category.html'
-    fields = '__all__'
+    fields = ('title', 'description')
     success_url = reverse_lazy('home')
 
 
