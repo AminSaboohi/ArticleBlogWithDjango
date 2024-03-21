@@ -14,7 +14,9 @@ pip install -r requirements.txt
 ```
 
 ## Configuration 
-Before running the application, you must configure your local settings. Copy sample_setting.py to local_setting.py and follow the instructions within to set up your database connection and other necessary settings. ## Setting Up the Database Run the following commands to set up your database: 
+Before running the application, you must configure your local settings. Copy sample_setting.py to local_setting.py and follow the instructions within to set up your database connection and other necessary settings. 
+## Setting Up the Database
+Run the following commands to set up your database: 
 ```
 python manage.py makemigrations
 ```
